@@ -1,8 +1,10 @@
 local Players = game.Players
 local LocalPlayer = Players.LocalPlayer
 
+print("1")
 local function highlightCharacter(character)
     if character and not character:FindFirstChildOfClass("Highlight") then
+        print("2")
         local highlight = Instance.new("Highlight")
         highlight.Parent = character
     end
