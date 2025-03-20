@@ -1,7 +1,22 @@
-local plr = game.Players.LocalPlayer
-local all = game.Players:GetChildren()
+local Players = game.Players
+local LocalPlayer = Players.LocalPlayer
 
-for _,v in pairs(all) do
-  local Highlight = instance.new("Highlight")
-  Highlight.Parent = v.Character
+local function highlightCharacter(character)
+    if character and not character:FindFirstChildOfClass("Highlight") then
+        local highlight = Instance.new("Highlight")
+        highlight.Parent = character
+    end
 end
+
+for _, player in pairs(Players:GetPlayers()) do
+    if player ~= LocalPlayer then  -- Avoid highlighting yourself
+        highlightCharacter(player.Character)
+        player.CharacterAdded:Connect(highlightCharacter)
+    end
+end
+
+Players.PlayerAdded:Connect(function(player)
+    if player ~= LocalPlayer then
+        player.CharacterAdded:Connect(highlightCharacter)
+    end
+end)
