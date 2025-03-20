@@ -1,0 +1,7 @@
+local plr = game.Players.LocalPlayer
+local all = game.Players:GetChildren()
+
+for _,v in pairs(all) do
+  local Highlight = instance.new("Highlight")
+  Highlight.Parent = v.Character
+end
